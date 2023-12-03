@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="index.css">
+    <title>Music Stats Home</title>
+</head>
+<body id="body">
+    <div class="contain">
+    <div class="head">
+    <h1>Find Artist Stats</h1>
+    <div class="search">
+    <input type="text" name="artist Spotify URL" id="artist" placeholder="Enter artist's spotify URL">
+    <span class="Or">OR</span>
+    <input type="text" name="artist Spotify URL" id="artist_name_search" placeholder="Enter artist's name">
+    </div>
+    <button type="submit" id="btn" onclick="submitForm()">Submit</button>
+    <div class="output" id="output">
+        <div id="Profile">
+        </div>
+        <div class="stats">
+            <div id="artist_name"></div>
+            <div id="followers"></div>
+            <div id="popularity"></div>
+            <div id="genres"></div>
+        </div>
+        <div id="top_albums">
+            <div class="album_info"></div>
+        </div>
+    </div>
+    <script src="album.js"></script>
+    <script>
+        function submitForm() {
+            var artistInput = document.getElementById("artist").value;
+            var nameInput = document.getElementById("artist_name_search").value;
+
+            if (artistInput && nameInput) {
+                alert("Please fill only one of the input fields.");
+        }
+    }
+    </script>
+    <script type="module" src="script.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cheerio"></script> -->
+</body>
+</html>
