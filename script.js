@@ -112,6 +112,7 @@ async function getArtist(url_temp) {
             .then(response => response.json())
             .then(data => {
                 const output = document.querySelector(".output");
+                output.style.visibility = "visible";
                 output.innerHTML = 
                 `<div class="artist_profile">
                 <div class="artist_img"></div>
@@ -154,7 +155,7 @@ async function getArtist(url_temp) {
                   labels: [artist_name, 'Others'],
                   datasets: [{
                     data: [data.popularity, 100-data.popularity], // Values for each slice
-                    backgroundColor: ['#9cd8fe', '#4c3a32']
+                    backgroundColor: ['white', '#092D36']
                   }]
                 };
               
@@ -167,6 +168,8 @@ async function getArtist(url_temp) {
             .catch(error => {
                 console.error('Error fetching artist data:', error);
             });
+            const srch = document.querySelector(".search");
+            srch.style.marginBottom = "10%";
         }).then(()=>{
         accessToken().then((token)=>{
             var url2 = url + '/top-tracks?market=US';
@@ -216,7 +219,21 @@ compare_btn.addEventListener('click', function(){
     if(artist1.value && artist2.value){
         var val1 = artist1.value;
         var val2 = artist2.value;
-        if(val1.includes("https://open.spotify.com/artist/")){
+        if(val1.includes("https://open.spotify.com/artist/") && val2.includes("https://open.spotify.com/artist/")){
+            popularity(val1, document.querySelector("#cmprout"), "chart1", data1).then((result)=>{
+                return popularity(val2, document.querySelector("#cmprout"), "chart2", data1);
+            });
+        }else if(val1.includes("https://open.spotify.com/artist/") && !val2.includes("https://open.spotify.com/artist/")){
+            popularity(val1, document.querySelector("#cmprout"), "chart1", data1).then((result)=>{
+                return getArtisturl(val2);
+            }).then((result)=>{
+                popularity(result, document.querySelector("#cmprout"), "chart2", data1);
+            });
+        }else if(!val1.includes("https://open.spotify.com/artist/") && val2.includes("https://open.spotify.com/artist/")){
+            getArtisturl(val1).then((result)=>{
+                popularity(result, document.querySelector("#cmprout"), "chart1", data1);
+                return popularity(val2, document.querySelector("#cmprout"), "chart2", data1);
+            })
         }else{
             const output = document.querySelector("#cmprout");
             artist1url = getArtisturl(val1);
@@ -267,10 +284,13 @@ async function popularity(url_inp, x, y, arr){
             }else{
                 x.removeChild(document.querySelector(".chart2"));
                 x.removeChild(document.querySelector(".chart1"));
+                x.removeChild(document.querySelector("h2"));
                 document.querySelector(".bargraph").removeChild(document.querySelector(".mybargraph"));
                 markechart(data.popularity, x, y, data.name);
                 arr = storedata(data.name, data.followers.total, arr);
             }
+            const  cmpr = document.querySelector(".compare");
+            cmpr.style.marginBottom = "2.5%";
         });
         return ret;
     });
@@ -278,14 +298,20 @@ async function popularity(url_inp, x, y, arr){
 }
 
 function markechart(popularity, x, y, name){
+        x.style.visibility = "visible";
         const chart = document.createElement('div');
         chart.className = y;
         x.appendChild(chart);
+        const chk = document.querySelector("h2");
         //chart creation
+        if(!chk){
+            const h1 = document.createElement('h2');
+            h1.innerHTML = "Popularity Comparison";
+            x.appendChild(h1);
+        }
             chart.innerHTML = `
             <h1>${name}</h1>
-            <canvas id="${y}" width="100%" height="100%"></canvas>
-            <h3 style="margin-top:1%">Popularity in Spotify</h3>`;
+            <canvas id="${y}" width="50%" height="50%"></canvas>`;
             const artist_name = name;
             var ctx = document.getElementById(y).getContext('2d');
         // Define the data for the pie chart
@@ -293,7 +319,7 @@ function markechart(popularity, x, y, name){
                 labels: [artist_name, 'Others'],
                 datasets: [{
                 data: [popularity, 100-popularity], // Values for each slice
-                backgroundColor: ['#9cd8fe', '#4c3a32']
+                backgroundColor: ['white', '#092D36']
                 }]
             };
             
@@ -318,7 +344,7 @@ function makegraph(arr){
     bargraph.className = "mybargraph";
     document.querySelector(".bargraph").appendChild(bargraph);
     bargraph.innerHTML = `
-    <h2>Followers</h2>
+    <h2>Followers Comparison</h2>
     <canvas id="myBarChart" width="50px" height="25px"></canvas>`;
         var ctx = document.getElementById('myBarChart').getContext('2d');
         var myBarChart = new Chart(ctx, {
