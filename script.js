@@ -319,7 +319,7 @@ function makegraph(arr){
     document.querySelector(".bargraph").appendChild(bargraph);
     bargraph.innerHTML = `
     <h2>Followers</h2>
-    <canvas id="myBarChart" width="100px" height="50px"></canvas>`;
+    <canvas id="myBarChart" width="50px" height="25px"></canvas>`;
         var ctx = document.getElementById('myBarChart').getContext('2d');
         var myBarChart = new Chart(ctx, {
           type: 'bar',
@@ -335,28 +335,23 @@ function makegraph(arr){
           },
           options: {
             scales: {
-              y: {
-                beginAtZero: true
-              }
-            },
-            plugins: {
-              legend: {
-                display: true,
-                labels: {
-                  fontSize: 14 // Adjust the font size of the legend
-                }
-              }
-            },
-            scales: {
               x: {
                 ticks: {
-                  fontSize: 12 // Adjust the font size of the x-axis labels
-                }
+                  color: '#9cd8fe', // X-axis label color
+                  fontSize: 30 // X-axis label font size
+                },
+                grid: {
+                    color: '#9cd8fe' // X-axis grid line color
+                  }
               },
               y: {
                 ticks: {
-                  fontSize: 12 // Adjust the font size of the y-axis labels
-                }
+                  color: '#9cd8fe', // Y-axis label color
+                  fontSize: 30 // Y-axis label font size
+                },
+                grid: {
+                    color: '#9cd8fe' // X-axis grid line color
+                  }
               }
             }
           }
