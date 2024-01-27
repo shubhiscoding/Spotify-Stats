@@ -1,4 +1,4 @@
-const artistname = document.querySelector('.artistname');
+let artistname = document.querySelector('.artistname');
 const artisturl = document.querySelector('.artisturl');
 const search_btn = document.querySelector('.search_btn');
 const logo = document.querySelector('.logo');
@@ -122,6 +122,7 @@ async function getArtist(url_temp) {
                 output.style.visibility = "visible";
                 output.innerHTML = 
                 `<div class="artist_profile">
+                <h3>Artist Profile</h3>
                 <div class="artist_img"></div>
                 <div class="artist_info">
                     <h2>${data.name}</h2>
@@ -134,6 +135,7 @@ async function getArtist(url_temp) {
                 <div class="top_album">
                 </div>
                 <div class="piechart">
+                <h3>Popularity in Spotify</h3>
                     <div class="pie_img"></div>
                 </div>`
                 const profimg = document.querySelector(".artist_img");
@@ -152,8 +154,8 @@ async function getArtist(url_temp) {
 
                 //chart creation
                 const chart = document.querySelector(".pie_img");
-                chart.innerHTML = `<canvas id="myPieChart" width="100%" height="100%"></canvas>
-                <h3 style="margin-top:1%">Popularity in Spotify</h3>`;
+                chart.innerHTML = `
+                <canvas id="myPieChart" width="100%" height="100%"></canvas>`;
                 const chartimg = document.getElementById('myPieChart');
                 const artist_name = data.name;
                 var ctx = document.getElementById('myPieChart').getContext('2d');
@@ -186,14 +188,17 @@ async function getArtist(url_temp) {
                 },
             }).then(response2 => response2.json())
             .then(data2 => {
+                console.log(data2);
                 const top_album = document.querySelector(".top_album");
-                top_album.innerHTML = `                    <div class="album_img"></div>
+                top_album.innerHTML = `                    
+                <h3>Top Track</h3>
+                <div class="album_img"></div>
                 <div class="album_info">
-                    <h2>${data2.tracks[0].album.name}</h2>
+                    <h2>${data2.tracks[0].name}</h2>
                     <p>Release Date: ${data2.tracks[0].album.release_date}</p>
                     <p>Popularity: ${data2.tracks[0].popularity}%</p>
-                    <p>No. Of Tracks: ${data2.tracks[0].album.total_tracks}</p>
-                    <p>Spotify URL: <a href="${data2.tracks[0].album.external_urls.spotify}" target="_blank">Click Here</a></p>
+                    <p>Explicit: ${data2.tracks[0].explicit}</p>
+                    <p>Spotify URL: <a href="${data2.tracks[0].external_urls.spotify}" target="_blank">Click Here</a></p>
                 </div>`;
                 const albumimg = document.querySelector(".album_img");
                 const img2 = data2.tracks[0].album.images;
@@ -207,7 +212,7 @@ async function getArtist(url_temp) {
                         }
                     }
                 }
-                albumimg.innerHTML = `<a href="${data2.tracks[0].album.external_urls.spotify}" target="_blank">
+                albumimg.innerHTML = `<a href="${data2.tracks[0].external_urls.spotify}" target="_blank">
                                         <img src="${albmimg}" alt="album image"></a>`;
             }).catch(error => {
                 console.error('Error fetching artist data:', error);

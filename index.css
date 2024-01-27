@@ -354,11 +354,26 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 5%;
+}
+.artist_profile h3{
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 1%;
+    margin-left: 1%;
+    margin-top: 0.5%;
 }
 .top_album{
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 5%;
+}.top_album h3{
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 1%;
+    margin-left: 1%;
+    margin-top: 0.5%;
 }
 .artist_img{
     display: flex;
@@ -379,6 +394,17 @@ input[type="text"] {
     width: 70%;
     height: 70%;
     margin-bottom: 0.3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 5%;
+}
+.piechart h3{
+    font-size: 2.2em;
+    font-weight: bold;
+    margin-bottom: 3%;
+    margin-left: 1%;
+    margin-top: 0.5%;
 }
 .pie_img{
     display: flex;
@@ -389,12 +415,7 @@ input[type="text"] {
     margin-bottom: 0.3%;
     background-color: #13072e;
 }
-.piechart h3{
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 0.3%;
-    margin-bottom: 0.3%;
-}
+
 .compare{
     width: 100%;
     height: 100%;
