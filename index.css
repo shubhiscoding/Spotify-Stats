@@ -259,6 +259,7 @@ a:hover{
     font-family: 'Poppins', sans-serif;
     margin-top: 1%;
     padding: 2% 5%;
+    margin-bottom: 20%;
 }
 .search h1{
     font-size: 3em;
@@ -395,6 +396,14 @@ input[type="text"] {
     font-family: 'Poppins', sans-serif;
     margin-top: 1%;
     padding: 2% 5%;
+    margin-bottom: 20%;
+}
+.compare h1{
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 1%;
+    margin-left: 1%;
+    margin-top: 0.5%;
 }
 .compare_contain{
     display: flex;
