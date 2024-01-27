@@ -275,7 +275,8 @@ async function popularity(url_inp, x, y){
             if(chk.length==0){
                 markechart(data.popularity, x, y, data.name);
             }else{
-                x.removeChild(chk[0]);
+                x.removeChild(document.querySelector(".chart2"));
+                x.removeChild(document.querySelector(".chart1"));
                 markechart(data.popularity, x, y, data.name);
             }
         });
