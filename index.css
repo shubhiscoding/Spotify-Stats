@@ -388,3 +388,85 @@ input[type="text"] {
     margin-bottom: 0.3%;
     margin-bottom: 0.3%;
 }
+.compare{
+    width: 100%;
+    height: 100%;
+    background-color: #13072e;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 1%;
+    padding: 2% 5%;
+}
+.compare_contain{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom right, #13072e, #3f2182);
+    width: 100%;
+    height: 100%;
+    padding: 2% 3%;
+}
+.compare span{
+    visibility: hidden;
+}
+.compare_btn{
+    margin-right: 0;
+    margin-left: 0;
+    width: 9%;
+    height: 45px;
+    padding: 1% 2%;
+    border-radius: 30px;
+    color: #b2abff;
+    background-color: white;
+    color: #13072e;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;   
+}
+.compare_btn:hover{
+    background-color: #b2abff;
+    transform: scale(1.06);
+    transition: transform 0.4s ease-in-out;
+}
+.compare_btn:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.cmprinpt input[type="text"] {
+    width: 40%;
+    margin-right: 0;
+}
+.artist2{
+    margin-left: 2%;
+}
+.cmprinpt{
+    display: flex;
+    width: 100%;
+    gap: 3%;
+}
+.compare_contain #cmprout{
+    display: flex;
+    justify-content: space-between;
+    width: 100%
+}
+.chart1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    background-color: #13072e;
+}
+.chart2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    background-color: #13072e;
+}

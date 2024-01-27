@@ -34,7 +34,17 @@ artbtn.addEventListener('click', function(){
     searchSection.scrollIntoView({ behavior: 'smooth' });
 });
 
+const cmprbtn = document.querySelector('.cmprbtn');
+cmprbtn.addEventListener('click', function(){
+    var compareSection = document.getElementById('compare');
+    compareSection.scrollIntoView({ behavior: 'smooth' });
+});
 
+const compare_artistbtn = document.querySelector('.compare_artistbtn');
+compare_artistbtn.addEventListener('click', function(){
+    var compareSection = document.getElementById('compare');
+    compareSection.scrollIntoView({ behavior: 'smooth' });
+});
 
 async function getArtisturl(x) {
     const name = x;
@@ -168,7 +178,6 @@ async function getArtist(url_temp) {
         }).then(()=>{
         accessToken().then((token)=>{
             var url2 = url + '/top-tracks?market=US';
-
             fetch(url2, {
                 headers: {
                     'Authorization': 'Bearer ' + token,
@@ -204,4 +213,101 @@ async function getArtist(url_temp) {
             });
         })
     });
+}
+
+const artist1 = document.querySelector('.artist1');
+const artist2 = document.querySelector('.artist2');
+const compare_btn = document.querySelector('.compare_btn');
+compare_btn.addEventListener('click', function(){
+    var artist1url;
+    var artist2url;
+    if(artist1.value && artist2.value){
+        var val1 = artist1.value;
+        var val2 = artist2.value;
+        if(val1.includes("https://open.spotify.com/artist/")){
+            console.log(val1);
+        }else{
+            const output = document.querySelector("#cmprout");
+            artist1url = getArtisturl(val1);
+            artist1url.then((result)=>{
+                popularity(result, output, "chart1");
+                return getArtisturl(val2);
+            }).then((result)=>{
+                popularity(result, output, "chart2");
+            });
+        }
+    }else{
+        window.alert("Fill Both Fields");
+    }
+});
+
+async function popularity(url_inp, x, y){
+    let ret;
+    console.log(url_inp+" chk url");
+    const ID = url_inp.split('/')[4];
+    console.log(ID+" chk ID");
+    const url = 'https://api.spotify.com/v1/artists/' + ID;
+    console.log(url);
+    const clientId = "827b37123b254ddfa210f3c730739654";
+    const clientSecret = 'f50082f5547f47dfa555c117f9e2e396';
+    const accessToken = async () => {
+        const result = await fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
+            },
+            body: 'grant_type=client_credentials',
+        });
+    
+        const data = await result.json();
+        return data.access_token;
+        };
+    accessToken().then((token)=>{
+        fetch(url, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data);
+            const chk = document.getElementsByClassName(y);
+            if(chk.length==0){
+                markechart(data.popularity, x, y, data.name);
+            }else{
+                x.removeChild(chk[0]);
+                markechart(data.popularity, x, y, data.name);
+            }
+        });
+        return ret;
+    });
+    return ret;
+}
+
+function markechart(popularity, x, y, name){
+        const chart = document.createElement('div');
+        chart.className = y;
+        x.appendChild(chart);
+        //chart creation
+            chart.innerHTML = `
+            <h1>${name}</h1>
+            <canvas id="${y}" width="100%" height="100%"></canvas>
+            <h3 style="margin-top:1%">Popularity in Spotify</h3>`;
+            console.log(x);
+            const artist_name = name;
+            var ctx = document.getElementById(y).getContext('2d');
+        // Define the data for the pie chart
+            var data = {
+                labels: [artist_name, 'Others'],
+                datasets: [{
+                data: [popularity, 100-popularity], // Values for each slice
+                backgroundColor: ['#9cd8fe', '#4c3a32']
+                }]
+            };
+            
+        // Create the pie chart
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: data
+            });
 }
