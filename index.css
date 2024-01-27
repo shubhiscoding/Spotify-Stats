@@ -405,6 +405,24 @@ input[type="text"] {
     margin-left: 1%;
     margin-top: 0.5%;
 }
+.compare h1:hover{
+    color: #b2abff;
+    transform: scale(1.03);
+    transition: transform 0.8s ease-in-out;
+}
+.compare h1:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.compare h2:hover{
+    color: #b2abff;
+    transform: scale(1.01);
+    transition: transform 0.8s ease-in-out;
+}
+.compare h2:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
 .compare_contain{
     display: flex;
     flex-direction: column;
@@ -485,6 +503,13 @@ input[type="text"] {
     margin-bottom: 0.3%;
     margin-top: 3%;
     background-color: #13072e;
+}
+.bargraph h2{
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 0.3%;
+    margin-left: 0.8%;
+
 }
 .mybargraph{
     width: 100%;
