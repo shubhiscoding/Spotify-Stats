@@ -48,7 +48,6 @@ compare_artistbtn.addEventListener('click', function(){
 
 async function getArtisturl(x) {
     const name = x;
-    console.log(name);
     const urlID = 'https://api.spotify.com/v1/search?q=' + name;
     const url = urlID + '&type=artist&market=IN&include_external=audio';
     const clientId = "827b37123b254ddfa210f3c730739654";
@@ -76,10 +75,8 @@ async function getArtisturl(x) {
 
       if (artistData.artists && artistData.artists.items && artistData.artists.items[0] && artistData.artists.items[0].external_urls && artistData.artists.items[0].external_urls.spotify) {
         var chk = artistData.artists.items[0].external_urls.spotify.toString();
-        console.log(chk+" chk function");
         return chk;
       } else {
-        console.error('Error: Unable to retrieve artist URL');
         return null; // or handle this case accordingly
       }
     } catch (error) {
@@ -89,11 +86,8 @@ async function getArtisturl(x) {
     }
 }
 async function getArtist(url_temp) {
-    console.log(url_temp+" chk url");
     const ID = url_temp.split('/')[4];
-    console.log(ID+" chk ID");
     const url = 'https://api.spotify.com/v1/artists/' + ID;
-    console.log(url);
     const clientId = "827b37123b254ddfa210f3c730739654";
     const clientSecret = 'f50082f5547f47dfa555c117f9e2e396';
     const accessToken = async () => {
@@ -117,7 +111,6 @@ async function getArtist(url_temp) {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 const output = document.querySelector(".output");
                 output.innerHTML = 
                 `<div class="artist_profile">
@@ -147,7 +140,6 @@ async function getArtist(url_temp) {
                         }
                     }
                 }
-                console.log(artimg+" profimg");
                 profimg.innerHTML = `<a href="${data.external_urls.spotify}" target="_blank"><img src="${artimg}" alt="artist image"></a>`;
 
                 //chart creation
@@ -184,7 +176,6 @@ async function getArtist(url_temp) {
                 },
             }).then(response2 => response2.json())
             .then(data2 => {
-                console.log(data2);
                 const top_album = document.querySelector(".top_album");
                 top_album.innerHTML = `                    <div class="album_img"></div>
                 <div class="album_info">
@@ -221,33 +212,31 @@ const compare_btn = document.querySelector('.compare_btn');
 compare_btn.addEventListener('click', function(){
     var artist1url;
     var artist2url;
+    var data1=[];
     if(artist1.value && artist2.value){
         var val1 = artist1.value;
         var val2 = artist2.value;
         if(val1.includes("https://open.spotify.com/artist/")){
-            console.log(val1);
         }else{
             const output = document.querySelector("#cmprout");
             artist1url = getArtisturl(val1);
             artist1url.then((result)=>{
-                popularity(result, output, "chart1");
+                popularity(result, output, "chart1", data1);
                 return getArtisturl(val2);
             }).then((result)=>{
-                popularity(result, output, "chart2");
-            });
+                popularity(result, output, "chart2", data1);
+                return data1;
+            })
         }
     }else{
         window.alert("Fill Both Fields");
     }
 });
 
-async function popularity(url_inp, x, y){
+async function popularity(url_inp, x, y, arr){
     let ret;
-    console.log(url_inp+" chk url");
     const ID = url_inp.split('/')[4];
-    console.log(ID+" chk ID");
     const url = 'https://api.spotify.com/v1/artists/' + ID;
-    console.log(url);
     const clientId = "827b37123b254ddfa210f3c730739654";
     const clientSecret = 'f50082f5547f47dfa555c117f9e2e396';
     const accessToken = async () => {
@@ -270,14 +259,17 @@ async function popularity(url_inp, x, y){
             },
         }).then(response => response.json())
         .then(data => {
-            console.log(data);
             const chk = document.getElementsByClassName(y);
             if(chk.length==0){
                 markechart(data.popularity, x, y, data.name);
+                arr = storedata(data.name, data.followers.total, arr);
+                if(arr.length==2){makegraph(arr);}
             }else{
                 x.removeChild(document.querySelector(".chart2"));
                 x.removeChild(document.querySelector(".chart1"));
+                document.querySelector(".bargraph").removeChild(document.querySelector(".mybargraph"));
                 markechart(data.popularity, x, y, data.name);
+                arr = storedata(data.name, data.followers.total, arr);
             }
         });
         return ret;
@@ -294,7 +286,6 @@ function markechart(popularity, x, y, name){
             <h1>${name}</h1>
             <canvas id="${y}" width="100%" height="100%"></canvas>
             <h3 style="margin-top:1%">Popularity in Spotify</h3>`;
-            console.log(x);
             const artist_name = name;
             var ctx = document.getElementById(y).getContext('2d');
         // Define the data for the pie chart
@@ -311,4 +302,63 @@ function markechart(popularity, x, y, name){
                 type: 'pie',
                 data: data
             });
+}
+function storedata(name, popularity, arr){
+    arr.push([name, popularity]);
+    return arr;
+}
+function makegraph(arr){
+    var dataLabels = [];
+    dataLabels.push(arr[0][0]);
+    dataLabels.push(arr[1][0]);
+    var dataset1 = [];
+    dataset1.push(arr[0][1]);
+    dataset1.push(arr[1][1]);
+    const bargraph = document.createElement('div');
+    bargraph.className = "mybargraph";
+    document.querySelector(".bargraph").appendChild(bargraph);
+    bargraph.innerHTML = `
+    <h2>Followers</h2>
+    <canvas id="myBarChart" width="100px" height="50px"></canvas>`;
+        var ctx = document.getElementById('myBarChart').getContext('2d');
+        var myBarChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: dataLabels,
+            datasets: [{
+              label: 'Followers',
+              data: dataset1,
+              backgroundColor: '#9cd8fe', // Bar color
+              borderColor: 'rgba(75, 192, 192, 1)', // Border color
+              borderWidth: 1 // Border width
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            },
+            plugins: {
+              legend: {
+                display: true,
+                labels: {
+                  fontSize: 14 // Adjust the font size of the legend
+                }
+              }
+            },
+            scales: {
+              x: {
+                ticks: {
+                  fontSize: 12 // Adjust the font size of the x-axis labels
+                }
+              },
+              y: {
+                ticks: {
+                  fontSize: 12 // Adjust the font size of the y-axis labels
+                }
+              }
+            }
+          }
+        });
 }
