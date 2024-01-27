@@ -1,6 +1,13 @@
 const artistname = document.querySelector('.artistname');
 const artisturl = document.querySelector('.artisturl');
 const search_btn = document.querySelector('.search_btn');
+const logo = document.querySelector('.logo');
+logo.querySelector('span').addEventListener('click', function(){
+    window.open(location.href, '_blank');
+});
+logo.querySelector('img').addEventListener('click', function(){
+    window.open(location.href, '_blank');
+});
 search_btn.addEventListener('click', function(){
     if(artistname.value && artisturl.value){
         window.alert("Fill Only One Field");

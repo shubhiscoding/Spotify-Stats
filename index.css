@@ -82,12 +82,14 @@ a:hover{
     color: #b2abff;
     transform: scale(1.1);
     transition: transform 0.4s ease-in-out;
+    cursor: pointer;
 }
 .logo span:hover,
 .logo span:hover ~ img {
     color: #b2abff;
     transform: scale(1.1);
     transition: transform 0.4s ease-in-out;
+    cursor: pointer;
 }
 
 .logo span:not(hover){
