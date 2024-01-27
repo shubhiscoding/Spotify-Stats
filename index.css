@@ -1,243 +1,390 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Nova Square', sans-serif;
-    background-color: rgba(7, 7, 7);
-    /* background: linear-gradient(to bottom, #070707, #ae393f); */
-    margin-left: 25x;
-    margin-right: 25px;
+    font-family: 'Poppins', sans-serif;
+    padding: 2% 5%;
+    background-color: #13072e;
+    padding: 0;
+    width: 100%;
+    color: white;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #13072e;
+    padding: 0 2%;
+    height: 10vh;
+    width: 100%;
+    /* position: fixed;  */
 }
 
-.head {
-    text-align: center;
+.nav-links {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
 }
 
-h1 {
-    /* box-shadow: 3px 3px 3px rgba(14, 13, 13, 0.5), -3px -3px 3px rgba(46, 171, 159, 0.5); */
-    color: rgb(57, 130, 142);
-    font-size: 3em;
-    font-weight: 500;
-    font-family: 'Arvo', serif;
-    margin-bottom: 10px;
-    text-align: center;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 3px rgba(12, 12, 12, 0.5), -3px -3px 4px rgba(85, 89, 132, 0.5);
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.3em;
+    transition: color 0.5s, transform 0.5s; /* Add transition for color and transform */
+}
+a{
+    text-decoration: none;
+    color: #b2abff;
+}
+a:hover{
+    color: #3f2182;
+}
+.nav-links .cmprbtn:hover{
+    color: #b2abff;
+    transform: scale(1.1);
+    transition: transform 0.4s ease-in-out;
+}
+.nav-links .cmprbtn:not(:hover) {
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.nav-links .artbtn:hover{
+    color: #b2abff;
+    transform: scale(1.1);
+    transition: transform 0.4s ease-in-out;
+}
+.nav-links .artbtn:not(:hover) {
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.nav-links .cmprbtn a:hover,
+.nav-links .artbtn a:hover {
+    color: #b2abff;;
+    transition: 0.5s;
 }
 
-#btn {
-    background-color: rgb(57, 130, 142); /* Green background color */
-    color: white; /* White text color */
-    margin-top: 5px;
-    padding: 10px 20px; /* Padding for better spacing */
-    font-size: 16px; /* Font size */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 90%;
+.logo {
+    display: flex;
+    justify-content: flex-start;
+    color: aliceblue;
+    font-size: 2em;
+    align-items: center;
+    width: 80%; /* Set the logo to take up 20% of the width */
+}
+.logo img:hover,
+.logo img:hover + span {
+    color: #b2abff;
+    transform: scale(1.1);
+    transition: transform 0.4s ease-in-out;
+}
+.logo span:hover,
+.logo span:hover ~ img {
+    color: #b2abff;
+    transform: scale(1.1);
+    transition: transform 0.4s ease-in-out;
 }
 
-#btn:hover {
-    box-shadow: 3px 3px 3px rgba(6, 6, 6, 0.5), -3px -3px 3px rgba(46, 167, 171, 0.5);
-    background-color: #459aa0; /* Darker green on hover */
+.logo span:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.logo img:not(:hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+
+.logo img {
+    margin-right: 10px; /* Add some margin between the logo image and the text */
 }
 
 .contain {
-    display: flex;
-    flex-direction: column;
-
-    margin: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: #13072e;
+    font-family: 'Poppins', sans-serif;
+    padding: 2% 5%;
 }
 
+.home{
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(to bottom right, #13072e, #3f2182);
+    width: 100%;
+    height: 100%;
+    padding: 2% 3%;
+    /* position: absolute; */
+}
+.home-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5%;
+    width: 60%;
+    padding-top: 10%;
+    margin-left: 2%;
+}
+.home-img{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 0;
+    width: 100%;
+    transition: transform 0.6s ease-in-out;
+}
+.home-img img:hover{
+    transform: scale(1.06);
+    transition: transform 0.8s ease-in-out;
+}
+.home-img img:not(:hover) {
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.texts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.texts h1{
+    font-size: 3em;
+    font-weight: bold;
+}
+.texts h1:hover{
+    color: #b2abff;
+    transform: scale(1.04);
+    transition: transform 0.4s ease-in-out;
+}
+.texts h1:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.texts p:hover{
+    color: #b2abff;
+    transform: scale(1.04);
+    transition: transform 0.4s ease-in-out;
+}
+.texts p:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.texts p{
+    width: 85%;
+}
+.dis_stats {
+    display: inline-block;
+    padding: 2% 4%;
+    border-radius: 30px;
+    background-color: #b2abff;
+    color: #13072e;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.3em;
+    border: none;
+    outline: none;
+}
+.dis_stats:hover{
+    background-color: #13072e;
+    color: #b2abff;
+    transform: scale(1.08);
+    transition: transform 0.4s ease-in-out;
+}
+.dis_stats:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.artist_statsbtn{
+    display: inline-block;
+    align-items: center;
+    justify-content: space-arround;
+    padding: 3% 6%;
+    border-radius: 30px;
+    color: #b2abff;
+    background-color: white;
+    color: #13072e;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    width: warap-content;
+    cursor: pointer;
+}
+.compare_artistbtn{
+    display: inline-block;
+    align-items: center;
+    margin-left: 5%;
+    justify-content: space-arround;
+    padding: 3% 6%;
+    border-radius: 30px;
+    color: #b2abff;
+    background-color: white;
+    color: #13072e;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    width: warap-content;
+    cursor: pointer;
+}
+.artist_statsbtn:hover{
+    background-color: #b2abff;
+    transform: scale(1.06);
+    transition: transform 0.4s ease-in-out;
+}
+.compare_artistbtn:hover{
+    background-color: #b2abff;
+    transform: scale(1.06);
+    transition: transform 0.4s ease-in-out;
+}
+
+.artist_statsbtn:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.compare_artistbtn:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.search{    
+    width: 100%;
+    height: 100%;
+    background-color: #13072e;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 1%;
+    padding: 2% 5%;
+}
+.search h1{
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 1%;
+    margin-left: 1%;
+    margin-top: 0.5%;
+}
+.search h1:hover{
+    color: #b2abff;
+    transform: scale(1.03);
+    transition: transform 0.8s ease-in-out;
+}
+.search h1:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.search_contain{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(to bottom right, #13072e, #3f2182);
+    width: 100%;
+    height: 100%;
+    padding: 2% 3%;
+}
+.input_box{
+    width: 100%;
+    padding: 2% 0%;
+    padding-left: 3%;
+    background: linear-gradient(to right, #2d2d77, #1c1c43);
+    border: #b2abff;
+    border-radius: 20px;
+}
+.input_box span{
+    margin-left: 1%;
+    margin-right: 1%;
+    color: #b2abff;
+    font-size: 1.8em;
+    font-weight: bold;
+}
 input[type="text"] {
-    box-shadow: 3px 3px 3px rgba(7, 7, 7, 0.5), -3px -3px 3px rgba(59, 161, 184, 0.5);
-    background-color: black;
-    color: rgb(50 222 176);
-    width: 46%;
+    background-color: rgb(248, 244, 244);
+    color: rgb(0, 5, 4);
+    width: 40%;
+    height: 45px;
     padding: 10px;
     margin: 8px 0;
     box-sizing: border-box;
     border: 1px solid rgb(50 222 176);
-    border-radius: 4px;
+    border-radius: 20px;
     font-size: 14px;
 }
-
-.Or {
-    color: rgb(57, 130, 142);
-    font-size: 3em;
-    font-weight: 500;
-    font-family: 'Arvo', serif;
-    margin-top: 5px;
+.search_btn{
+    margin-right: 0;
+    margin-left: 2%;
+    width: 9%;
+    padding: 1% 2%;
+    border-radius: 30px;
+    color: #b2abff;
+    background-color: white;
+    color: #13072e;
     text-align: center;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 3px rgba(8, 8, 8, 0.5), -3px -3px 4px rgba(85, 89, 132, 0.5);
-}
-
-input[type="text"]:focus {
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
     outline: none;
-    border-color: #1976D2; /* Change border color on focus */
+    cursor: pointer; 
 }
-
-/* Add this to your existing CSS */
-.output {
+.search_btn:hover{
+    background-color: #b2abff;
+    transform: scale(1.06);
+    transition: transform 0.4s ease-in-out;
+}
+.search_btn:not(hover){
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+.output{
     display: flex;
-    margin: 20px;
-    padding: 20px;
-    border-radius: 4px;
-    background-color:rgb(7, 7, 7);
-    font-size: 20px;
-    font-weight: bold;
-    justify-content: space-between;
-}
-
-#Profile {
-    width: 200px; /* Adjust the width as needed */
-    margin-right: 20px; /* Add some space between the profile photo and text */
-    flex-grow: 50;
-}
-
-.stats {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 30; /* This will make the stats div take up all available space */
-}
-
-.label {
-    color: #a33535;
-}
-.url{
-    width: 0px;
-    height: 0px;
-}
-
-#artist_name {
-    color: #0c0c0c;
-    font-size: 1.5em;
-    font-family: 'Arvo', serif;
-    font-weight: bold;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(232, 44, 44, 0.5);
-    text-transform: uppercase;
-}
-
-#album{
-    color: #0c0c0c;
-    font-size: 1.2em;
-    font-family: 'Arvo', serif;
-    text-shadow: 2px 2px 4px rgba(232, 44, 44, 0.5);
-    /* margin-top: 0px;*/
-    margin-bottom: 10px;
-    /* text-align: center;
-    justify-content: center;
-    align-items: center; */
-    /* text-transform: uppercase; */
-}
-
-#followers {
-    font-size: 1.2em; /* Adjust the font size as needed */
-    margin-top: 10px; /* Add some space between name and followers */
-}
-#top_albums {
-    box-shadow: 0px 0px 0px rgba(74, 73, 73, 0.5), -0px -0px 0px rgba(218, 103, 103, 0.5);
-    display: flex;
-    flex-direction: column;
     justify-content: space-evenly;
-    align-items: start;
-    background-color: rgb(7, 7,7);
-    font-size: 1.2em; /* Adjust the font size as needed */
-    padding-left: 5px;
-    flex: 110;
+    gap: 1%;
+    padding: 1% 2%;
 }
-
-.search{
+.artist_profile{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 15px;
-    margin-right: 15px;
+    flex-direction: column;
+    width: 100%;
 }
-
-#albumimg a{
+.top_album{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.artist_img{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 320px;
+    background-color: #13072e;
+}
+.album_img{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 320px;
+    background-color: #13072e;
+    /* transform: scale(1.1); */
+}
+.piechart{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0.3%;
+}
+.pie_img{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0.3%;
+    background-color: #13072e;
 }
-img {
-    box-shadow: 5px 5px 5px rgba(220, 91, 91, 0.5), -5px -5px 5px rgba(121, 121, 121, 0.5);
-}
-
-
-#spotify_link img{
-    margin-top: 2px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0);
-}
-#artist_name img{
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0);
-}
-#albumimg{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#album_name{
-    color: #3c0a0a;
-    font-size: 0.8em; /* Adjust the font size as needed */
+.piechart h3{
+    font-size: 1.5em;
     font-weight: bold;
-    margin-top: 5px; 
-}
-
-.album_info{
-    display: flex;
-    flex-direction: column;
-    color: #080808;
-    align-items: start;
-    font-family: 'Nova Square', sans-serif;
-    font-size: 0.7em; /* Adjust the font size as needed */
-    font-weight: 550;
-}
-
-@media screen and (max-width: 1000px) {
-    .output {
-        display: flex;
-        flex-direction: column;
-        column-gap: 5px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        justify-content: center;
-        align-items: center;
-    }
-    .stats{
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    #top_albums {
-        margin-top: 15px;
-    }
-    body{
-        margin: 0px;
-        /* background: linear-gradient(to bottom, #070707, #ae393f); */
-    }
-    .search{
-        display: flex;
-        flex-direction: column;
-        gap: 0px;
-        justify-content: center;
-        align-items: center;
-    }
-    .Or{
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-    input[type="text"] {
-        width: 100%;
-    }
-    #Profile {
-        margin-right:0px;
-    }
+    margin-bottom: 0.3%;
+    margin-bottom: 0.3%;
 }

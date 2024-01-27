@@ -1,12 +1,46 @@
-async function getArtisturl() {
-  const ch = document.getElementById('artist_name_search').value;
-  if (!ch) {
-    return document.getElementById('artist').value.toString();
-  } else {
-    const name = document.getElementById('artist_name_search').value;
+const artistname = document.querySelector('.artistname');
+const artisturl = document.querySelector('.artisturl');
+const search_btn = document.querySelector('.search_btn');
+search_btn.addEventListener('click', function(){
+    if(artistname.value && artisturl.value){
+        window.alert("Fill Only One Field");
+    }else if(artistname.value.length==0 && artisturl.value.length==0){
+        window.alert("Fill Atleast One Field");
+    }else{
+        var url_temp="";
+        var url_fun;
+        if(artisturl.value){
+            url_temp = String(artisturl.value);
+            getArtist(url_temp);
+        }
+        if(artistname.value){
+            url_fun = getArtisturl(artistname.value);
+            url_fun.then((result)=>{
+                url_temp  = result;
+                getArtist(url_temp);
+            })
+        }
+    }
+});
+
+const artist_statsbtn = document.querySelector('.artist_statsbtn');
+artist_statsbtn.addEventListener('click', function(){
+    var searchSection = document.getElementById('search');
+    searchSection.scrollIntoView({ behavior: 'smooth' });
+});
+const artbtn  = document.querySelector('.artbtn');
+artbtn.addEventListener('click', function(){
+    var searchSection = document.getElementById('search');
+    searchSection.scrollIntoView({ behavior: 'smooth' });
+});
+
+
+
+async function getArtisturl(x) {
+    const name = x;
+    console.log(name);
     const urlID = 'https://api.spotify.com/v1/search?q=' + name;
     const url = urlID + '&type=artist&market=IN&include_external=audio';
-
     const clientId = "827b37123b254ddfa210f3c730739654";
     const clientSecret = 'f50082f5547f47dfa555c117f9e2e396';
 
@@ -31,7 +65,9 @@ async function getArtisturl() {
       const artistData = await response.json();
 
       if (artistData.artists && artistData.artists.items && artistData.artists.items[0] && artistData.artists.items[0].external_urls && artistData.artists.items[0].external_urls.spotify) {
-        return artistData.artists.items[0].external_urls.spotify;
+        var chk = artistData.artists.items[0].external_urls.spotify.toString();
+        console.log(chk+" chk function");
+        return chk;
       } else {
         console.error('Error: Unable to retrieve artist URL');
         return null; // or handle this case accordingly
@@ -41,57 +77,131 @@ async function getArtisturl() {
       alert('Error fetching artist data:', error);
       return null; // or handle this case accordingly
     }
-  }
 }
-
-
-async function getArtist() {
-  const IDurl = await getArtisturl();
-  console.log(IDurl);
-  const ID = IDurl.split('/')[4];
-  const url = 'https://api.spotify.com/v1/artists/' + ID;
-
-  const clientId = "827b37123b254ddfa210f3c730739654";
-  const clientSecret = 'f50082f5547f47dfa555c117f9e2e396';
-  const spotifyImg = "https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Black.png";
-
-  const accessToken = async () => {
-    const result = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
-      },
-      body: 'grant_type=client_credentials',
-    });
-
-    const data = await result.json();
-    return data.access_token;
-  };
-
-  // Use the access token inside the fetch call
-  accessToken()
-    .then((token) => {
-      fetch(url, {
-        headers: {
-          'Authorization': 'Bearer ' + token,
-        },
-      })
-        .then(response => response.json())
-        .then(data => {
-          // Update your HTML elements with the retrieved data
-          document.getElementById('Profile').innerHTML = `<img src="${data.images[0].url}" width="100%"></img>`;
-          document.getElementById('artist_name').innerHTML = `${data.name} <a href="${data.external_urls.spotify}" target="_blank"><img src="${spotifyImg}" width="100px"></img></a>`;
-          document.getElementById('followers').innerHTML = `Followers:<span class="label"> ${data.followers.total}</span>`;
-          document.getElementById('popularity').innerHTML = `Popularity on Spotify:<span class="label"> ${data.popularity}%</span>`;
-          document.getElementById('genres').innerHTML = `Genres:<span class="label"> ${data.genres.join(', ')}</span>`;
-        })
-        .catch(error => {
-          console.error('Error fetching artist data:', error);
+async function getArtist(url_temp) {
+    console.log(url_temp+" chk url");
+    const ID = url_temp.split('/')[4];
+    console.log(ID+" chk ID");
+    const url = 'https://api.spotify.com/v1/artists/' + ID;
+    console.log(url);
+    const clientId = "827b37123b254ddfa210f3c730739654";
+    const clientSecret = 'f50082f5547f47dfa555c117f9e2e396';
+    const accessToken = async () => {
+        const result = await fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
+            },
+            body: 'grant_type=client_credentials',
         });
-    })
-    .catch(error => {
-      console.error('Error fetching access token:', error);
+    
+        const data = await result.json();
+        return data.access_token;
+        };
+        accessToken().then((token) => {
+        fetch(url, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const output = document.querySelector(".output");
+                output.innerHTML = 
+                `<div class="artist_profile">
+                <div class="artist_img"></div>
+                <div class="artist_info">
+                    <h2>${data.name}</h2>
+                    <p>Followers: ${data.followers.total.toLocaleString()}</p>
+                    <p>Popularity: ${data.popularity}%</p>
+                    <p>Genres: <span>${data.genres.join(', ')}</span></p>
+                    <p>Spotify URL: <a href="${data.external_urls.spotify}" target="_blank">Click Here</a></p>
+                </div>
+                </div>
+                <div class="top_album">
+                </div>
+                <div class="piechart">
+                    <div class="pie_img"></div>
+                </div>`
+                const profimg = document.querySelector(".artist_img");
+                const img = data.images;
+                var artimg;
+                var ch =0;
+                for(var i=0;i<img.length;i++){
+                    if(img[i].height<340){
+                        if(ch<img[i].height){
+                            artimg = img[i].url;
+                            ch = img[i].height;
+                        }
+                    }
+                }
+                console.log(artimg+" profimg");
+                profimg.innerHTML = `<a href="${data.external_urls.spotify}" target="_blank"><img src="${artimg}" alt="artist image"></a>`;
+
+                //chart creation
+                const chart = document.querySelector(".pie_img");
+                chart.innerHTML = `<canvas id="myPieChart" width="100%" height="100%"></canvas>
+                <h3 style="margin-top:1%">Popularity in Spotify</h3>`;
+                const chartimg = document.getElementById('myPieChart');
+                const artist_name = data.name;
+                var ctx = document.getElementById('myPieChart').getContext('2d');
+                // Define the data for the pie chart
+                var data = {
+                  labels: [artist_name, 'Others'],
+                  datasets: [{
+                    data: [data.popularity, 100-data.popularity], // Values for each slice
+                    backgroundColor: ['#9cd8fe', '#4c3a32']
+                  }]
+                };
+              
+                // Create the pie chart
+                var myPieChart = new Chart(ctx, {
+                  type: 'pie',
+                  data: data
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching artist data:', error);
+            });
+        }).then(()=>{
+        accessToken().then((token)=>{
+            var url2 = url + '/top-tracks?market=US';
+
+            fetch(url2, {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                },
+            }).then(response2 => response2.json())
+            .then(data2 => {
+                console.log(data2);
+                const top_album = document.querySelector(".top_album");
+                top_album.innerHTML = `                    <div class="album_img"></div>
+                <div class="album_info">
+                    <h2>${data2.tracks[0].album.name}</h2>
+                    <p>Release Date: ${data2.tracks[0].album.release_date}</p>
+                    <p>Popularity: ${data2.tracks[0].popularity}%</p>
+                    <p>No. Of Tracks: ${data2.tracks[0].album.total_tracks}</p>
+                    <p>Spotify URL: <a href="${data2.tracks[0].album.external_urls.spotify}" target="_blank">Click Here</a></p>
+                </div>`;
+                const albumimg = document.querySelector(".album_img");
+                const img2 = data2.tracks[0].album.images;
+                var albmimg;
+                var ch2=0;
+                for(var i =0; i<img2.length;i++){
+                    if(img2[i].height<340){
+                        if(ch2<img2[i].height){
+                            albmimg = img2[i].url;
+                            ch2 = img2[i].height;
+                        }
+                    }
+                }
+                albumimg.innerHTML = `<a href="${data2.tracks[0].album.external_urls.spotify}" target="_blank">
+                                        <img src="${albmimg}" alt="album image"></a>`;
+            }).catch(error => {
+                console.error('Error fetching artist data:', error);
+            });
+        })
     });
 }
-document.getElementById('btn').addEventListener('click', getArtist);

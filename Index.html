@@ -5,47 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Music Stats Home</title>
 </head>
 <body id="body">
-    <div class="contain">
-    <div class="head">
-    <h1>Find Artist Stats</h1>
-    <div class="search">
-    <input type="text" name="artist Spotify URL" id="artist" placeholder="Enter artist's spotify URL">
-    <span class="Or">OR</span>
-    <input type="text" name="artist Spotify URL" id="artist_name_search" placeholder="Enter artist's name">
-    </div>
-    <button type="submit" id="btn" onclick="submitForm()">Submit</button>
-    <div class="output" id="output">
-        <div id="Profile">
+    <section class="contain">   
+        <div class="navbar">
+            <div class="logo">
+                <img src="./img/logo.png" width="60px" alt="logo">
+                <span><p>Spotify Stats.</p></span> 
+            </div>
+            <div class="nav-links">
+                <div class="cmprbtn"><a href="index.php">Compare Artists</a></div>
+                <div class="artbtn"><a href="#">Artists Stats</a></div>
+            </div>
         </div>
-        <div class="stats">
-            <div id="artist_name"></div>
-            <div id="followers"></div>
-            <div id="popularity"></div>
-            <div id="genres"></div>
+        <div class="home">
+            <div class="home-text">
+                <div class="tagline">
+                    <button class="dis_stats">#NumbersOfYourArtist</button>
+                </div>
+                <div class="texts">
+                <span><h1>Artists Stats</h1></span>
+                <p>Cool Spotify hack alert! Dig up some juicy stats on your ultimate music icon or compare them to other legends based on fan base, popularity, and more. Get ready to discover some ear-tickling insights!</p>
+                </div>
+                <div class="btns">
+                    <button class="artist_statsbtn">Find Stats</button>
+                    <button class="compare_artistbtn">Compare Artist</button>
+                </div>
+            </div>
+            <div class="home-img">
+                <img src="./img/people.png" alt="hero" width="100%">
+            </div>
         </div>
-        <div id="top_albums">
-            <div class="album_info"></div>
-        </div>
-    </div>
-    <script src="album.js"></script>
-    <script>
-        function submitForm() {
-            var artistInput = document.getElementById("artist").value;
-            var nameInput = document.getElementById("artist_name_search").value;
+    </section>
+    <section class="search" id="search">
+        <h1>Search Your Artist</h1>
+        <div class="search_contain">
+            <div class="input_box">
+                <input class="artistname" type="text" placeholder="Search By Artist Name">
+                <span>Or</span>
+                <input class="artisturl" type="text" placeholder="Search By Artist URL">
+                <button class="search_btn">Search</button>
+            </div>
+            <div class="output">
 
-            if (artistInput && nameInput) {
-                alert("Please fill only one of the input fields.");
-        }
-    }
-    </script>
-    <script type="module" src="script.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cheerio"></script> -->
+            </div>
+        </div>
+    </section>
+    <script src="script.js"></script>
 </body>
 </html>
