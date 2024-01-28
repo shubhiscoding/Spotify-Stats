@@ -5,7 +5,7 @@ const logo = document.querySelector('.logo');
 setTimeout(function(){
     if (isMobileDevice()) {
         // Code to run if the user is on a mobile device
-        window.alert("Use Desktop for better experience.");
+        window.alert("Charts appear better in Desktop.");
       } else {
         // Code to run if the user is not on a mobile device
         console.log("Not a mobile device.");
