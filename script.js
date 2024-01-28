@@ -164,7 +164,7 @@ async function getArtist(url_temp) {
 
                 //chart creation
                 const chart = document.querySelector(".pie_img");
-                chart.innerHTML = `
+                chart.innerHTML = `<h4>Popularity Percentile</h4>
                 <canvas id="myPieChart" width="100%" height="100%"></canvas>`;
                 const chartimg = document.getElementById('myPieChart');
                 const artist_name = data.name;
@@ -332,7 +332,7 @@ function markechart(popularity, x, y, name){
             x.appendChild(h1);
         }
             chart.innerHTML = `
-            <h1>${name}</h1>
+            <h1>${name}<h3>Popularity Percentile</h3></h1>
             <canvas id="${y}" width="50%" height="50%"></canvas>`;
             const artist_name = name;
             var ctx = document.getElementById(y).getContext('2d');

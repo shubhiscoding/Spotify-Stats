@@ -637,6 +637,12 @@ input[type="text"] {
     .compare h1{
         font-size: 1.8em;
     }
+    #cmprout h2{
+        display: none;
+    }
+    #cmprout h3{
+        font-size: 0.8em;
+    }
     .cmprinpt{
         display: flex;
         flex-direction: column;
