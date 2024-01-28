@@ -38,7 +38,9 @@ search_btn.addEventListener('click', function(){
                 url_temp  = result;
                 getArtist(url_temp);
                 var searchSection = document.querySelector('.output');
-                searchSection.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(function(){
+                    searchSection.scrollIntoView({ behavior: 'smooth' });
+                    },700);
             })
         }
     }
@@ -273,7 +275,9 @@ compare_btn.addEventListener('click', function(){
         }
 
         var searchSection = document.querySelector('#cmprout');
+        setTimeout(function(){
         searchSection.scrollIntoView({ behavior: 'smooth' });
+        },100);
     }else{
         window.alert("Fill Both Fields");
     }
