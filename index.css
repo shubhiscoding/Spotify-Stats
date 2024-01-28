@@ -146,6 +146,11 @@ a:hover{
     transform: scale(1);
     transition: transform 0.4s ease-in-out;
 }
+.btns{
+    display: flex;
+    /* justify-content: space-evenly; */
+    margin-top: 3%;
+}
 .texts{
     display: flex;
     flex-direction: column;
@@ -549,4 +554,129 @@ input[type="text"] {
     width: 100%;
     height: 100%;
     font-size: large;
+}
+@media only screen and (max-width: 767px) {
+    .nav-links{
+        display: none;
+        width: 0%;
+    }
+    .logo{
+        width: 100%;
+    }
+    .home{
+        border-radius: 20px;
+    }
+    .home-img{
+        display: none;
+    }
+    .home-text{
+        width: 100%;
+    }
+    .home-text p{
+        width: 100%;
+    }
+    .btns{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin-top: 3%;
+    }
+    .compare_artistbtn{
+        margin-top: 3%;
+        width: 100%;
+        margin-left: 0;
+    }
+    .input_box{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 0% 3%;
+    }
+    .input_box input[type="text"]{
+        margin: 0;
+        margin-top: 2%;
+        width: 100%;
+    }
+    .search h1{
+        font-size: 1.8em;
+    }
+    .search_btn{
+        width: 100%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: 0;
+        height: 35px;
+    }
+    .output{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 0.3%;
+    }
+    .top_album{
+        margin-top: 2%;
+    }
+    .output h3{
+        font-size: 1.8em;
+    }
+    .piechart{
+        align-items: start;
+        width: 100%;
+        margin-top: 2%;
+        margin-bottom: 2.4%;
+    }
+    .piechart h3{
+        margin: 0;
+        font-size: 1.7em;
+    }
+    .artist_img img{
+        width: 100%;
+    }
+    .compare h1{
+        font-size: 1.8em;
+    }
+    .cmprinpt{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        /* align-items: center; */
+        width: 100%;
+        margin-top: 2%;
+        margin-bottom: 2.4%;
+        padding: 0% 3%;
+    }
+    .cmprinpt input[type="text"] {
+        width: 100%;
+    }
+    .artist1{
+        width: 100%;
+    }
+    .artist2{
+        width: 100%;
+    }
+    .compare_btn{
+        width: 100%;
+        height: 35px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+    .chart1{
+        width: 100%;
+    }
+    .chart2{
+        width: 100%;
+        margin-top: 2%;
+        margin-bottom: 2.5%;
+    }
+    .chart1 h1{
+        font-size: 1.3em;
+    }
+    .chart2 h1{
+        font-size: 1.3em;
+    }
+    .mybargraph h2{
+        font-size: 1.3em;
+    }
 }
