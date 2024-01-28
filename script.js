@@ -2,6 +2,16 @@ let artistname = document.querySelector('.artistname');
 const artisturl = document.querySelector('.artisturl');
 const search_btn = document.querySelector('.search_btn');
 const logo = document.querySelector('.logo');
+setTimeout(function(){
+    if (isMobileDevice()) {
+        // Code to run if the user is on a mobile device
+        window.alert("Use Desktop for better experience.");
+      } else {
+        // Code to run if the user is not on a mobile device
+        console.log("Not a mobile device.");
+      }
+}, 1000);
+
 logo.querySelector('span').addEventListener('click', function(){
     window.open(location.href, '_blank');
 });
@@ -395,3 +405,7 @@ function makegraph(arr){
           }
         });
 }
+function isMobileDevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints;
+  }
+  
